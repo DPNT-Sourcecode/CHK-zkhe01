@@ -4,7 +4,7 @@
 # skus = unicode string
 def checkout(skus):
     item_price = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40}
-    order = {'A': 0, 'B': 0, 'C': 0, 'D': 0}
+    order = {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0}
     num_item_offer = {'A': {5, 3}, 'B': 2}
     multi_price = {'A': {5: 200, 3: 130}, 'B': 45, 'E': 'B'}
     i = 0
@@ -38,4 +38,13 @@ def checkout(skus):
                 total += (discounted + non_discounted)
 
     return total
+
+
+print(checkout("AAAAA"))
+print(checkout("AAA"))
+print(checkout("AAAAAB"))
+print(checkout("AAAAABB"))
+print(checkout("AAAAABBBE"))
+print(checkout("AAAAABBBEE"))
+
 
