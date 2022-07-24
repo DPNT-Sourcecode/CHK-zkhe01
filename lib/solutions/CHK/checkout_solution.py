@@ -32,6 +32,9 @@ def checkout(skus):
 
         item = skus[i]
 
+        if item not in prices:
+            return -1
+
         if item not in multi_price:
             total += (units*prices[item])
         else:
@@ -42,3 +45,7 @@ def checkout(skus):
         i += 1
 
     return total
+
+
+print(checkout("a"))
+
