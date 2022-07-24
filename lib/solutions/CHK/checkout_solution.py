@@ -59,7 +59,9 @@ def checkout(skus):
                                      order[second_item] - (order[item]//unit))
 
     for item, units in order.items():
-        for unit, price in price_table[item].sorted(reversed=True, key=lambda x: x[1]).items():
+        unit_price = sorted(
+            price_table[item].items(), key=lambda kv: kv[1], reverse=True)
+        for unit, price in unit_price.items():
             total += ((order[item]//unit) * price)
             order[item] = order[item] % unit
 
@@ -88,4 +90,5 @@ print(checkout(""))
 print(checkout("AAAAABB"))
 print(checkout("AAAAABBEE"))
 print(checkout("AAAAAFFF"))
+
 
