@@ -22,18 +22,8 @@ def checkout(skus):
 
     for item, offer in multi_products.items():
         for unit, second_item in offer.items():
-            print(item)
-            print(second_item)
-            print(unit)
             order[second_item] = max(0,
                                      order[second_item] - (order[item]//unit))
-
-    print(order)
-    # order['B'] -= (order['E']//2)
-    # if order['B'] < 0:
-    #     order['B'] = 0
-
-    # order['F'] -= (order['F']//3)
 
     for item, unit in order.items():
         if item not in multi_price:
@@ -54,11 +44,3 @@ def checkout(skus):
                 total += (discounted + non_discounted)
 
     return total
-
-
-print(checkout("AAAAA"))
-print(checkout("AAAAAEEB"))
-print(checkout("AAAAAEEBBB"))
-print(checkout("AAAAAFFF"))
-
-
