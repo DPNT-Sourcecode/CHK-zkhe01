@@ -25,7 +25,3 @@ def checkout(skus):
             total += (discounted + non_discounted)
 
     return total
-
-
-
-
