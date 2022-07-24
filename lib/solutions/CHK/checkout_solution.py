@@ -34,16 +34,13 @@ def checkout(skus):
         'Y': {1: 10},
         'Z': {1: 50}
     }
-    # item_price = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40, 'F': 10}
     order = {k: 0 for k in price_table.keys()}
-    # num_item_offer = {'A': {5, 3}, 'B': 2}
     multi_products = {
         'E': {2: 'B'},
         'F': {3: 'F'},
         'N': {3: 'M'},
         'R': {3: 'Q'},
         'U': {4: 'U'}}
-    # multi_price = {'A': {5: 200, 3: 130}, 'B': 45}
     i = 0
     total = 0
 
@@ -59,36 +56,11 @@ def checkout(skus):
                                      order[second_item] - (order[item]//unit))
 
     for item, units in order.items():
-        unit_price = sorted(
-            price_table[item].items(), key=lambda kv: kv[1], reverse=True)
-        for unit, price in unit_price.items():
+        for unit, price in dict(sorted(
+                price_table[item].items(), key=lambda kv: kv[1], reverse=True)).items():
             total += ((order[item]//unit) * price)
             order[item] = order[item] % unit
-
-        # if item not in multi_price:
-        #     total += (unit*item_price[item])
-        # else:
-        #     if item == 'E':
-        #         total += unit*item_price[item]
-        #     elif item == 'B':
-        #         discounted = (unit//num_item_offer[item])*multi_price[item]
-        #         non_discounted = (unit % num_item_offer[item])*item_price[item]
-        #         total += (discounted + non_discounted)
-        #     elif item == 'A':
-        #         discounted = (unit//5)*200
-        #         unit = unit % 5
-        #         discounted += (unit//3)*130
-        #         unit = unit % 3
-        #         non_discounted = unit * item_price[item]
-        #         total += (discounted + non_discounted)
-
     return total
 
-
-print(checkout("AAAAA"))
-print(checkout(""))
-print(checkout("AAAAABB"))
-print(checkout("AAAAABBEE"))
-print(checkout("AAAAAFFF"))
 
 
