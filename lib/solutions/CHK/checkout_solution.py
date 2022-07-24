@@ -27,5 +27,6 @@ def checkout(skus):
     return total
 
 
-print(checkout("1A2B3C1D"))
+print(checkout("4A3B3C0D"))
+
 
