@@ -68,16 +68,14 @@ def checkout(skus):
             while available_items >= group_num:
                 cnt = 0
                 for item, price in group_price.items():
-                    # print(available_items)
-                    while cnt < group_num:
+                    while cnt < group_num and order[item] > 0:
                         order[item] -= 1
                         cnt += 1
-                    print(cnt)
                     if cnt == group_num:
-                        print(available_items)
                         total += group_value
                         available_items -= group_num
                         break
+    print("total = ", total)
 
     for item, units in order.items():
         for unit, price in dict(sorted(
@@ -90,6 +88,7 @@ def checkout(skus):
 print(checkout(""))
 print(checkout("AAAAA"))
 print(checkout("SSS"))
+
 
 
 
