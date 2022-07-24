@@ -17,7 +17,7 @@ def checkout(skus):
         'H': {1: 10, 5: 45, 10: 80},
         'I': {1: 35},
         'J': {1: 60},
-        'K': {1: 80, 2: 150},
+        'K': {1: 70, 2: 120},
         'L': {1: 90},
         'M': {1: 15},
         'N': {1: 40},
@@ -25,14 +25,14 @@ def checkout(skus):
         'P': {1: 50, 5: 200},
         'Q': {1: 30, 3: 80},
         'R': {1: 50},
-        'S': {1: 30},
+        'S': {1: 20},
         'T': {1: 20},
         'U': {1: 40},
         'V': {1: 50, 2: 90, 3: 130},
         'W': {1: 20},
-        'X': {1: 90},
-        'Y': {1: 10},
-        'Z': {1: 50}
+        'X': {1: 17},
+        'Y': {1: 20},
+        'Z': {1: 21}
     }
     order = {k: 0 for k in price_table.keys()}
     multi_products = {
@@ -75,7 +75,6 @@ def checkout(skus):
                         total += group_value
                         available_items -= group_num
                         break
-    print("total = ", total)
 
     for item, units in order.items():
         for unit, price in dict(sorted(
@@ -87,7 +86,8 @@ def checkout(skus):
 
 print(checkout(""))
 print(checkout("AAAAA"))
-print(checkout("SSS"))
+print(checkout("SSSXVZ"))
+
 
 
 
