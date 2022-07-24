@@ -40,7 +40,11 @@ def checkout(skus):
         'F': {3: 'F'},
         'N': {3: 'M'},
         'R': {3: 'Q'},
-        'U': {4: 'U'}}
+        'U': {4: 'U'}
+    }
+    group_products = {
+        ('S', 'T', 'X', 'Y', 'Z'): {3: 45}
+    }
     i = 0
     total = 0
 
@@ -55,9 +59,29 @@ def checkout(skus):
             order[second_item] = max(0,
                                      order[second_item] - (order[item]//unit))
 
+    for group, offer in group_products.items():
+        group_price = dict(sorted(
+            {item: price_table[item] for item in group}, key=lambda kv: kv[1], reverse=True))
+        available_items = sum(list(group_price.values()))
+        for group_num, g_price in offer.items():
+            while available_items >= group_num:
+                cnt = 0
+                for item, price in group_price.items():
+                    while cnt <= group_num:
+                        order[item] -= 1
+                        cnt += 1
+                    if cnt == group_num:
+                        total += g_price
+                        break
+
     for item, units in order.items():
         for unit, price in dict(sorted(
                 price_table[item].items(), key=lambda kv: kv[1], reverse=True)).items():
             total += ((order[item]//unit) * price)
             order[item] = order[item] % unit
     return total
+
+
+print(checkout(""))
+print(checkout("AAAAA"))
+
