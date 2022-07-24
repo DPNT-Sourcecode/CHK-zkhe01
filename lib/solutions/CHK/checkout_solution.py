@@ -60,8 +60,10 @@ def checkout(skus):
                                      order[second_item] - (order[item]//unit))
 
     for group, offer in group_products.items():
+        print({item: price_table[item][1] for item in group})
         group_price = dict(sorted(
-            {item: price_table[item] for item in group}, key=lambda kv: kv[1], reverse=True))
+            {item: price_table[item][1] for item in group}.items(), key=lambda kv: kv[1], reverse=True))
+        print(group_price)
         available_items = sum(list(group_price.values()))
         for group_num, g_price in offer.items():
             while available_items >= group_num:
@@ -84,4 +86,3 @@ def checkout(skus):
 
 print(checkout(""))
 print(checkout("AAAAA"))
-
