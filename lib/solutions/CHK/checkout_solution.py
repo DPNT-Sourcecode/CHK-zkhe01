@@ -61,6 +61,3 @@ def checkout(skus):
             total += ((order[item]//unit) * price)
             order[item] = order[item] % unit
     return total
-
-
-
