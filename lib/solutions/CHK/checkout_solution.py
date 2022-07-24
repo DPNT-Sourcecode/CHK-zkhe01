@@ -3,10 +3,10 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
-    item_price = {'A': 50, 'B': 30, 'C': 20, 'D': 15}
+    item_price = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40}
     order = {'A': 0, 'B': 0, 'C': 0, 'D': 0}
-    num_item_offer = {'A': 3, 'B': 2}
-    multi_price = {'A': 130, 'B': 45}
+    num_item_offer = {'A': {5, 3}, 'B': 2}
+    multi_price = {'A': {5: 200, 3: 130}, 'B': 45, 'E': 'B'}
     i = 0
     total = 0
 
@@ -20,8 +20,22 @@ def checkout(skus):
         if item not in multi_price:
             total += (unit*item_price[item])
         else:
-            discounted = (unit//num_item_offer[item])*multi_price[item]
-            non_discounted = (unit % num_item_offer[item])*item_price[item]
-            total += (discounted + non_discounted)
+            if item == 'E':
+                order['B'] -= (unit//2)
+                if order['B'] < 0:
+                    order['B'] = 0
+            elif item == 'B':
+                discounted = (unit//num_item_offer[item])*multi_price[item]
+                non_discounted = (unit % num_item_offer[item])*item_price[item]
+                total += (discounted + non_discounted)
+
+            elif item == 'A':
+                discounted = (unit//5)*200
+                unit -= (unit//5)
+                discounted += (unit//3)*130
+                unit -= (unit//3)
+                non_discounted = unit * item_price[item]
+                total += (discounted + non_discounted)
 
     return total
+
