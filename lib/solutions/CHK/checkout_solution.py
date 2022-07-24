@@ -23,11 +23,15 @@ def checkout(skus):
 
     while i < len(skus):
         units = 0
-        while skus[i].isdigit():
+        while i < len(skus) and skus[i].isdigit():
             units = (units*10) + int(skus[i])
             i += 1
 
+        if i >= len(skus):
+            return -1
+
         item = skus[i]
+
         if item not in multi_price:
             total += (units*prices[item])
         else:
@@ -38,10 +42,3 @@ def checkout(skus):
         i += 1
 
     return total
-
-
-print(checkout("2"))
-
-
-
-
