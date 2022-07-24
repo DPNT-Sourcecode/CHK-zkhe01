@@ -27,12 +27,5 @@ def checkout(skus):
     return total
 
 
-print(checkout(""))
-print(checkout("A"))
-print(checkout("B"))
-print(checkout("AxA"))
-print(checkout("AAA"))
-print(checkout("AAAA"))
-
 
 
